@@ -29,7 +29,24 @@ O fundo "Multimercado" foi substituido pelo "Imobiliário" pois me sinto mais co
 ### Como os dados são carregados?
 > Descreva como seu agente acessa a base de conhecimento.
 
+
+
+pode ser injetado no prompt ou injetado via codigo, como no exemplo abaixo:
 ```python
+import pandas as pd
+import json
+
+
+df_historico = pd.read_csv('historico_atendimento.csv', sep=',', encoding='utf-8')
+df_transacoes = pd.read_csv('transacoes.csv', sep=',', encoding='utf-8')
+
+
+with open('perfil_investidor.json', 'r', encoding='utf-8') as f:
+    df_perfil = pd.DataFrame(json.load(f))
+
+
+with open('produtos_financeiros.json', 'r', encoding='utf-8') as f:
+    df_produtos = pd.DataFrame(json.load(f))
 
 
 ```
@@ -37,7 +54,18 @@ O fundo "Multimercado" foi substituido pelo "Imobiliário" pois me sinto mais co
 ### Como os dados são usados no prompt?
 > Os dados vão no system prompt? São consultados dinamicamente?
 
-[Sua descrição aqui]
+```text
+
+DADOS E PERFIL DO CLIENTE:
+
+
+HISTÓRICO DO CLIENTE:
+
+TRANSAÇÕES DO CLIENTE:
+
+PRODUTOS FINANCEIROS DISPONIVEIS:
+
+```
 
 ---
 
